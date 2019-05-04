@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder, Form } from "@angular/forms";
+import { FormGroup, FormBuilder } from "@angular/forms";
 import * as _ from "lodash";
 
 @Component({
@@ -44,7 +44,7 @@ export class MultiCheckboxExampleComponent implements OnInit {
     this.personForm = this.fb.group({
       hobbies: this.createHobbies(this.myhobbies)
     });
-    this.onHobbyChange();
+    this.getSelectedHobbies();
   }
 
   createHobbies(hobbiesInputs) {
@@ -54,8 +54,8 @@ export class MultiCheckboxExampleComponent implements OnInit {
     return this.fb.array(arr);
   }
 
-  onHobbyChange() {
-    this.selectedHobbies = _.map(this.personForm.controls.hobbies.controls, (hobby, i) => {
+  getSelectedHobbies() {
+    this.selectedHobbies = _.map(this.personForm.controls.hobbies['controls'], (hobby, i) => {
       return hobby.value && this.myhobbies[i].value;
     });
     this.selectedHobbies = _.filter(this.selectedHobbies, function (hobby) {
@@ -66,8 +66,7 @@ export class MultiCheckboxExampleComponent implements OnInit {
   }
 
   setFormInputs() {
-    const selectedHobbies: any = [
-      {
+    const updatedHobbiesList: any = [{
         name: "Sports",
         value: "sports"
       },
@@ -88,9 +87,8 @@ export class MultiCheckboxExampleComponent implements OnInit {
       {
         name: "Writing",
         value: "writing"
-      }
-    ];
-    this.personForm.controls.hobbies = this.createHobbies(selectedHobbies);
-    this.onHobbyChange();
+      }];
+    this.personForm.controls.hobbies = this.createHobbies(updatedHobbiesList);
+    this.getSelectedHobbies();
   }
 }

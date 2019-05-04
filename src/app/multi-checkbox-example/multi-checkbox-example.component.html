@@ -7,7 +7,7 @@
         <div class="flex-container">
           <label *ngFor="let hobby of personForm.controls.hobbies.controls; let i=index;"
             class="flex-container  align-center multi-checkbox">
-            <input type="checkbox" [formControl]="hobby" (change)="onHobbyChange(hobby, myhobbies[i].name);">
+            <input type="checkbox" [formControl]="hobby" (change)="getSelectedHobbies(hobby, myhobbies[i].name);">
             {{myhobbies[i].name}}
           </label>
         </div>
