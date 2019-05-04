@@ -1,27 +1,47 @@
-# MultiCheckboxFormControl
+# Multi checkbox Form control- Angular7
+Reactive form is very useful and powerful feature of Angular to build forms. It has built-in methods to manage form state and to validate form inputs as well. Form has following building blocks:
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.3.
+FormControl: Individual form Item, maintain status and validation rules.
+
+FormGroup: Collections of FormControl, maintain status for collection of formControl.
+
+FormArray: Array of FormControls.
 
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## Form Element Creation
+Include “ReactiveFormsModule” in application to use form element and add “ReactiveFormsModule” in module’s import array. I used it in app.module file.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+`import { ReactiveFormsModule } from '@angular/forms'; `
 
-## Build
+## Create Form Element
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+First, Create a FormGroup and add properties in FormGroup known as Form control. Each Form control item is known by it’s name. Include FormGroup, FormArray and FormControl form classes in component. We will use it to create form element.
 
-## Running unit tests
+`import { FormGroup, FormControl, FormArray } from "@angular/forms";`
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+FormControl class is used to create single form item, to create multiple checkbox we need to create FormArray of FormControl. “createHobbies” method is returning FormArray of FormControl type.
 
-## Running end-to-end tests
+FormControl constructor takes initial value of item. Here, I am passing value of selected property of each hobby as values if available else false.
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+## Render Form Control
+
+PersonForm.hobbies is a FormArray type of control. It holds array of form control that we will use to render checkboxes. But to display label of checkboxes, we will use “myhobbies” variable of component.
+
+
+## Get value of Checkbox
+FormControl has value property that return value of control. To get FormControl’s item value, we need to traverse to that control through formGroup.
+
+`this.personForm.controls.hobbies` -- It will return hobbies control that we have created above.
+
+But hobbies holds multiple form control inside, so we have to reach there and return value. I have created a function that returns values of each hobbies control. Value of checkbox return either true or false. If it is true, it returns name of hobby from “myhobbies” array.
+
 
 ## Further help
+mail me @ jdheeraj32@gmail.com
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Author
+Dheeraj Jaiswal
+jdheeraj32@gmail.com
