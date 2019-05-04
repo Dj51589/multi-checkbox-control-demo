@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from "@angular/forms";
+import { FormGroup, FormControl, FormArray } from "@angular/forms";
 import * as _ from "lodash";
 
 @Component({
@@ -9,9 +9,10 @@ import * as _ from "lodash";
 })
 export class MultiCheckboxExampleComponent implements OnInit {
 
-  constructor(private fb: FormBuilder) { }
+  constructor() { }
   personForm: FormGroup;
-  selectedHobbies: [string];
+  selectedHobbies: [FormControl];
+  selectedHobbiesNames: [string];
   myhobbies: any = [
     {
       name: "Sports",
@@ -19,11 +20,13 @@ export class MultiCheckboxExampleComponent implements OnInit {
     },
     {
       name: "Music",
-      value: "music"
+      value: "music",
+      selected: true
     },
     {
       name: "Movie",
-      value: "movie"
+      value: "movie",
+      selected: true
     },
     {
       name: "Reading",
@@ -37,11 +40,10 @@ export class MultiCheckboxExampleComponent implements OnInit {
 
   ngOnInit() {
     this.createFormInputs();
-    this.setFormInputs();
   }
 
   createFormInputs() {
-    this.personForm = this.fb.group({
+    this.personForm = new FormGroup({
       hobbies: this.createHobbies(this.myhobbies)
     });
     this.getSelectedHobbies();
@@ -49,46 +51,23 @@ export class MultiCheckboxExampleComponent implements OnInit {
 
   createHobbies(hobbiesInputs) {
     const arr = hobbiesInputs.map(hobby => {
-      return this.fb.control(hobby.selected || false);
+      return new FormControl(hobby.selected || false);
     });
-    return this.fb.array(arr);
+    return new FormArray(arr);
   }
 
   getSelectedHobbies() {
     this.selectedHobbies = _.map(this.personForm.controls.hobbies['controls'], (hobby, i) => {
       return hobby.value && this.myhobbies[i].value;
     });
-    this.selectedHobbies = _.filter(this.selectedHobbies, function (hobby) {
+    this.getSelectedHobbiesName();
+  }
+
+  getSelectedHobbiesName() {
+    this.selectedHobbiesNames = _.filter(this.selectedHobbies, function (hobby) {
       if (hobby !== false) {
         return hobby;
       }
     });
-  }
-
-  setFormInputs() {
-    const updatedHobbiesList: any = [{
-        name: "Sports",
-        value: "sports"
-      },
-      {
-        name: "Music",
-        value: "music",
-        selected: true
-      },
-      {
-        name: "Movie",
-        value: "movie",
-        selected: true
-      },
-      {
-        name: "Reading",
-        value: "reading"
-      },
-      {
-        name: "Writing",
-        value: "writing"
-      }];
-    this.personForm.controls.hobbies = this.createHobbies(updatedHobbiesList);
-    this.getSelectedHobbies();
   }
 }

@@ -9,13 +9,13 @@
             class="flex-container  align-center multi-checkbox">
             <input type="checkbox" [formControl]="hobby" (change)="getSelectedHobbies(hobby, myhobbies[i].name);">
             {{myhobbies[i].name}}
-        </div>
+          </div>
         </div>
       </div>
       <div class="element">
         <label class="field-label">Selected Hobbies:</label>
         <div class="flex-container">
-          <label *ngFor="let hobby of selectedHobbies;">
+          <label *ngFor="let hobby of selectedHobbiesNames;">
             {{hobby}}
           </label>
         </div>
