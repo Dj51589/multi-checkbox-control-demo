@@ -1,0 +1,25 @@
+<div class="flex-container align-center flex-column">
+  <form [formGroup]="personForm" (ngSubmit)="onSubmit()" class="form">
+    <h2 class="text-center">Multiple checkbox Form control Demo</h2>
+    <div class="flex-container flex-wrap">
+      <div class="element">
+        <label class="field-label">Hobbies</label>
+        <div class="flex-container">
+          <label *ngFor="let hobby of personForm.controls.hobbies.controls; let i=index;"
+            class="flex-container  align-center multi-checkbox">
+            <input type="checkbox" [formControl]="hobby" (change)="onHobbyChange(hobby, myhobbies[i].name);">
+            {{myhobbies[i].name}}
+          </label>
+        </div>
+      </div>
+      <div class="element">
+        <label class="field-label">Selected Hobbies:</label>
+        <div class="flex-container">
+          <label *ngFor="let hobby of selectedHobbies;">
+            {{hobby}}
+          </label>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
