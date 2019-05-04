@@ -11,7 +11,6 @@ export class MultiCheckboxExampleComponent implements OnInit {
 
   constructor() { }
   personForm: FormGroup;
-  selectedHobbies: [FormControl];
   selectedHobbiesNames: [string];
   myhobbies: any = [
     {
@@ -57,17 +56,23 @@ export class MultiCheckboxExampleComponent implements OnInit {
   }
 
   getSelectedHobbies() {
-    this.selectedHobbies = _.map(this.personForm.controls.hobbies['controls'], (hobby, i) => {
-      return hobby.value && this.myhobbies[i].value;
-    });
+    this.selectedHobbiesNames = _.map(
+      this.personForm.controls.hobbies["controls"],
+      (hobby, i) => {
+        return hobby.value && this.myhobbies[i].value;
+      }
+    );
     this.getSelectedHobbiesName();
   }
 
   getSelectedHobbiesName() {
-    this.selectedHobbiesNames = _.filter(this.selectedHobbies, function (hobby) {
-      if (hobby !== false) {
-        return hobby;
+    this.selectedHobbiesNames = _.filter(
+      this.selectedHobbiesNames,
+      function(hobby) {
+        if (hobby !== false) {
+          return hobby;
+        }
       }
-    });
+    );
   }
 }
