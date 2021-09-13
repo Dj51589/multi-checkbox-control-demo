@@ -42,10 +42,3 @@ FormControl has value property that return value of control. To get FormControl�
 
 But hobbies holds multiple form control inside, so we have to reach there and return value. I have created a function that returns values of each hobbies control. Value of checkbox return either true or false. If it is true, it returns name of hobby from “myhobbies” array.
 
-
-## Further help
-mail me @ jdheeraj32@gmail.com
-
-## Author
-Dheeraj Jaiswal
-jdheeraj32@gmail.com
